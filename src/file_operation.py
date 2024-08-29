@@ -2,13 +2,14 @@ import json
 import os
 from abc import ABC, abstractmethod
 from datetime import datetime
+from typing import Any
 
 from config import DATA_DIR
 from src.vacancy import Vacancy
 
 
 class FileChange(ABC):
-    """Абстрактный класс для работы с API - платформ по поиску вакансий."""
+    """Абстрактный (родительский) класс для работы с API - платформой по поиску вакансий."""
 
     @abstractmethod
     def __init__(self):
@@ -24,7 +25,7 @@ class FileChange(ABC):
 
 
 class FileOperation(FileChange):
-    """Работа с файлами."""
+    """Дочерний класс для работы с файлами."""
 
     def __init__(self, filename: str = "Vacans_list"):
         # if filename is None:
@@ -32,26 +33,28 @@ class FileOperation(FileChange):
         self.__filename = filename + "_" + datetime.now().strftime("%Y_%m_%d-%H_%M")
 
     def load_file(self):
-        """Загрузка файла данных."""
+        """Метод для загрузки файла данных."""
 
         with open(self.__filename, encoding="utf-8") as json_file:
             data_list = json.load(json_file)
 
         return data_list
 
-    def write_file(self, data_list: list):
-        """Запись списка данных в файл."""
+    def write_file(self, data_list: list):  # type: ignore
+        """Метод для записи списка данных в файл."""
 
         with open(
-                os.path.join(DATA_DIR, self.__filename + ".vac"),
-                "w",
-                encoding="utf-8",
+            os.path.join(DATA_DIR, self.__filename + ".vac"),
+            "w",
+            encoding="utf-8",
         ) as f:
             json.dump(data_list, f, ensure_ascii=False, indent=4)
 
     def delete_by_id(self, id_list: list):
         data_list = self.load_file()
-        save_list = [vac_data for vac_data in data_list if vac_data.get('id') not in id_list]
+        save_list = [
+            vac_data for vac_data in data_list if vac_data.get("id") not in id_list
+        ]
         self.write_file(save_list)
 
     @staticmethod
@@ -69,9 +72,9 @@ class FileOperation(FileChange):
                 save_list.append(item)
 
         with open(
-                os.path.join(selected_file),
-                "w",
-                encoding="utf-8",
+            os.path.join(selected_file),
+            "w",
+            encoding="utf-8",
         ) as f:
             json.dump(save_list, f, ensure_ascii=False, indent=4)
 
@@ -101,11 +104,11 @@ def vac_obj_from_file() -> list:
     vac_list = load_file()
     vac_obj_list = []
     for item in vac_list:
-        vac_obj_list.append(Vacancy(**item))
+        vac_obj_list.append(Vacancy(**item))  # type: ignore
     return vac_obj_list
 
 
-def load_file() -> list:
+def load_file() -> tuple[list[str], str] | tuple[Any, str]:
     """Метод выбора файла в папке DATA и его чтения."""
 
     print("Список файлов в папке DATA")

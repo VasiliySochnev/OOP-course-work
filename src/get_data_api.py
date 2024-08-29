@@ -48,7 +48,7 @@ class HeadHunterAPI(JobsAPI):
         :return: vacancies - список словарей с вакансиями
         """
 
-        vacancies: list = []
+        vacancies = []
         for vacans in self.get_vacancies():
             vacancies.append(
                 {

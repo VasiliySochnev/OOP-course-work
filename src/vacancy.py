@@ -116,7 +116,7 @@ class Vacancy(VacansABS):
             print("Вакансий с такими критериями не найдено")
         return filtered_list
 
-    def range_from_salary(self, salary_from, salary_to) -> bool:
+    def range_from_salary(self, salary_from, salary_to) -> bool:  # type: ignore
         """Метод проверки объекта-вакансии перекрытия зарплатной вилки
         salary_from:int зарплата от
         salary_to:int зарплата до
