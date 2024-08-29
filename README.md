@@ -7,7 +7,7 @@ ___
 
 1. Склонируйте репозиторий на своем компьютере:
 
-`git clone https://github.com/MichaelGorbunov/CW_4_OOP.git`
+`git clone https://github.com/VasiliySochnev/OOP-course-work.git`
 
 2. Перейдите в папку с проектом:
 
