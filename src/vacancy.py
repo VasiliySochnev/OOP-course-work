@@ -3,7 +3,7 @@ from builtins import list
 
 
 class VacansABS(ABC):
-    """Абстрактный класс для работы с вакансиями."""
+    """Абстрактный (родительский) класс для работы с вакансиями."""
 
     @abstractmethod
     def __init__(self):
@@ -12,12 +12,12 @@ class VacansABS(ABC):
 
     @abstractmethod
     def __str__(self):
-        """Получение строковых значений."""
+        """Метод для получение строковых значений."""
         pass
 
 
 class Vacancy(VacansABS):
-    """Класс для работы с вакансиями."""
+    """Дочерний класс для работы с вакансиями."""
 
     vac_list: list = []
 
@@ -47,7 +47,7 @@ class Vacancy(VacansABS):
         Vacancy.vac_list.append(self)
 
     def __str__(self):
-        """Получение строковых значений объектов класса."""
+        """Метод для получения строковых значений объектов класса."""
         return (
             f"{self.name}\n"
             f"Id: {self.id}\n"
@@ -60,7 +60,7 @@ class Vacancy(VacansABS):
         )
 
     def vac_obj_to_dict(self):
-        """Метод для преобразования объекта вакансии в словарь."""
+        """Метод для преобразования объекта вакансий в словарь."""
 
         dict_of_vac = {
             "id": self.id,
@@ -117,9 +117,9 @@ class Vacancy(VacansABS):
         return filtered_list
 
     def range_from_salary(self, salary_from, salary_to) -> bool:  # type: ignore
-        """Метод проверки объекта-вакансии перекрытия зарплатной вилки
-        salary_from:int зарплата от
-        salary_to:int зарплата до
+        """Метод проверки объекта - вакансии перекрытия зарплатной вилки
+        salary_from: int - зарплата "ОТ"
+        salary_to: int - зарплата "ДО"
         возвращает bool.
         """
         if isinstance(salary_from, int) is True and isinstance(salary_to, int) is True:

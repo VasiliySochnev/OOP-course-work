@@ -58,7 +58,7 @@ def create_vacancy_object(vac_data_list):
 
 
 def select_top_vac_from_salary(count_vac):
-    """Функция для сортировки по зарплате."""
+    """Функция для сортировки вакансий по зарплате."""
 
     print("Отсортируем по зарплате и выведем топ самых высокооплачиваемых.")
     print("Эти вакансии будут отобраны дла работы с ними")
@@ -87,7 +87,7 @@ def filtered_vac_from_salary_range(sort_vac_obj_list):
     print("если указать 0 в качестве одной из границ в диапазон попадут зарплаты,")
     print("в которых граница не задана")
 
-    salary_list = input("Введите диапазон через запятую : ").split(",")
+    salary_list = input("Введите диапазон через запятую: ").split(",")
     if salary_list == [""]:
         salary_list = ["0", "0"]
     in_salary_from, in_salary_to = map(int, salary_list)
@@ -105,7 +105,7 @@ def filtered_vac_from_keywords(sort_vac_obj_list):
     print("Введите через запятую ключевые слова,")
     print("например - без опыта,обучение")
 
-    keyword_list = input("Введите ключевые слова : ").split(",")
+    keyword_list = input("Введите ключевые слова: ").split(",")
     print(keyword_list)
     if keyword_list != [""]:
         filter_keyword_vac_obj_list = Vacancy.filter_vacancies(
@@ -119,7 +119,7 @@ def filtered_vac_from_keywords(sort_vac_obj_list):
 
 
 def final_func(filter_keyword_vac_obj_list, search_vacancy):
-    """Функция, корорая выводит список оставшихся вакансия и сохраняет их в файл."""
+    """Функция, которая выводит список оставшихся вакансий и сохраняет их в файл."""
     if len(filter_keyword_vac_obj_list) > 0:
 
         print("Список оставшихся вакансий:")

@@ -8,7 +8,7 @@ import requests
 
 
 class JobsAPI(ABC):
-    """Абстрактный класс для работы с API платформой по поиску работы."""
+    """Абстрактный (родительский) класс для работы с API - платформой по поиску работы."""
 
     @abstractmethod
     def __init__(self):
@@ -20,7 +20,7 @@ class JobsAPI(ABC):
 
 
 class HeadHunterAPI(JobsAPI):
-    """Класс для получения вакансий из API платформы HeadHunter."""
+    """Дочерний класс для получения вакансий из API - платформы HeadHunter."""
 
     def __init__(self, keyword: str):
         self.url = "https://api.hh.ru/vacancies"
@@ -45,7 +45,7 @@ class HeadHunterAPI(JobsAPI):
     def get_vacans_short(self):
         """
         Метод для получения упрощенной информации о вакансии.
-        :return: vacancies - список словарей с вакансиями
+        return: vacancies - список словарей с вакансиями
         """
 
         vacancies = []
