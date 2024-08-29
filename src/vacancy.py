@@ -39,8 +39,6 @@ class Vacancy(VacansABS):
             salary_from if salary_from is not None else 0
         )  # None заменяем на 0
         self.salary_to = salary_to if salary_to is not None else 0  # None заменяем на 0
-        # self.salary_from = salary_from
-        # self.salary_to = salary_to
         self.url = url
         self.requirement = requirement
         self.responsibility = responsibility
@@ -81,9 +79,6 @@ class Vacancy(VacansABS):
         возвращает отфильтрованный список экземпляров класса по убыванию зарплаты.
         """
 
-        # cls.vac_list.sort(cls.vac_list, key=lambda x: x.salary_from, reverse=True)
-        # key=lambda book: book.pages, reverse=True
-        # cls.vac_list.sort(key=lambda x: x.salary_from, reverse=True)
         cls.vac_list.sort(reverse=True)
         return cls.vac_list
 
@@ -106,7 +101,6 @@ class Vacancy(VacansABS):
 
         filtered_list = []
         for vacancy in vacancies_list:
-            # print(vacancy.requirement)#отладка
             for word in filter_words:
                 if word.lower() in vacancy.requirement.lower().split():
                     filtered_list.append(vacancy)

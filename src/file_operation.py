@@ -28,8 +28,6 @@ class FileOperation(FileChange):
     """Дочерний класс для работы с файлами."""
 
     def __init__(self, filename: str = "Vacans_list"):
-        # if filename is None:
-        #     filename = datetime.now().strftime("%Y_%m_%d-%H_%M")
         self.__filename = filename + "_" + datetime.now().strftime("%Y_%m_%d-%H_%M")
 
     def load_file(self):
@@ -68,7 +66,6 @@ class FileOperation(FileChange):
         for item in data_list:
 
             if item.get("id") not in id_list:
-                # print(item)
                 save_list.append(item)
 
         with open(
@@ -85,12 +82,10 @@ def vac_file_list():
     file_list = []
     for entry in os.scandir(DATA_DIR):  # вывод списка файлов
         if entry.is_dir():
-            # skip directories
             continue
         elif entry.name.split(".")[-1] != "vac":
             continue
         else:
-            # print(entry.name)
             file_list.append(entry.name)
 
     for i, name_file in enumerate(file_list):

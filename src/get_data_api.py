@@ -1,7 +1,3 @@
-# https://api.hh.ru/vacancies?currency=RUR&only_with_salary=true&area=113&per_page=100&text=разработчик
-# https://api.hh.ru/openapi/redoc#tag/Poisk-vakansij/operation/get-vacancies
-
-
 from abc import ABC, abstractmethod
 
 import requests
@@ -40,7 +36,6 @@ class HeadHunterAPI(JobsAPI):
             return [{}]
         else:
             return response.json().get("items", {})
-        # return response.json()
 
     def get_vacans_short(self):
         """
@@ -55,13 +50,11 @@ class HeadHunterAPI(JobsAPI):
                     "id": int(vacans.get("id")),
                     "name": vacans.get("name"),
                     "city": vacans.get("area").get("name"),
-                    # "salary_from": vacans.get("salary").get("from"),
                     "salary_from": (
                         vacans.get("salary").get("from")
                         if vacans.get("salary").get("from") is not None
                         else 0
                     ),
-                    # "salary_to": vacans.get("salary").get("to"),
                     "salary_to": (
                         vacans.get("salary").get("to")
                         if vacans.get("salary").get("to") is not None
@@ -81,23 +74,3 @@ class HeadHunterAPI(JobsAPI):
                 }
             )
         return vacancies
-
-
-# class HH(Parser):
-#     """Класс для работы с API HeadHunter"""
-#     def __init__(self):
-#         self.url: str = 'https://api.hh.ru/vacancies'
-#         self.headers: dict = {'User-Agent': 'HH-User-Agent'}
-#         self.params: dict = {'text': '', 'page': 0, 'per_page': 100}
-#         self.vacancies: list = []
-#         print("Загрузка данных с ресурса HH.ru. Ждите.")
-#
-#     def load_vacancies(self, keyword: str):
-#         """Метод для получения данных с ресурса HH.ru"""
-#         self.params['text'] = keyword
-#         while self.params.get('page') != 20:
-#             response = requests.get(self.url, headers=self.headers, params=self.params)
-#             vacancies = response.json()['items']
-#             self.vacancies.extend(vacancies)
-#             self.params['page'] += 1
-#         return self.vacancies
