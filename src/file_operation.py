@@ -49,6 +49,9 @@ class FileOperation(FileChange):
             json.dump(data_list, f, ensure_ascii=False, indent=4)
 
     def delete_by_id(self, id_list: list):
+        """Функция, которая удаляет из данных объекты, идентификаторы которых указаны в списке
+        id_list. Оставшиеся объекты сохраняются в файл с помощью метода write_file."""
+
         data_list = self.load_file()
         save_list = [
             vac_data for vac_data in data_list if vac_data.get("id") not in id_list
