@@ -103,7 +103,7 @@ def filtered_vac_from_keywords(sort_vac_obj_list):
 
     print("Отфильтруем по ключевым словам")
     print("Введите через запятую ключевые слова,")
-    print("например - без опыта,обучение")
+    print("например: без опыта, обучение")
 
     keyword_list = input("Введите ключевые слова: ").split(",")
     print(keyword_list)

@@ -35,14 +35,37 @@ class Vacancy(VacansABS):
         self.id = id
         self.name = name
         self.city = city
-        self.salary_from = (
-            salary_from if salary_from is not None else 0
-        )  # None заменяем на 0
-        self.salary_to = salary_to if salary_to is not None else 0  # None заменяем на 0
+        self.salary_from = self._validate_salary(salary_from)
+        self.salary_to = self._validate_salary(salary_to)
         self.url = url
         self.requirement = requirement
         self.responsibility = responsibility
         Vacancy.vac_list.append(self)
+
+    def _validate_salary(self, salary):
+        """Приватный метод для валидации зарплаты."""
+
+        if salary is None:
+            return 0
+        if not isinstance(salary, int) or salary < 0:
+            raise ValueError("Зарплата должна быть положительным целым числом")
+        return salary
+
+    def __eq__(self, other):
+        """Метод для сравнения объектов. Это позволяет сравнивать списки объектов Vacancy в тестах."""
+
+        if not isinstance(other, Vacancy):
+            return False
+        return (
+                self.id == other.id
+                and self.name == other.name
+                and self.city == other.city
+                and self.salary_from == other.salary_from
+                and self.salary_to == other.salary_to
+                and self.url == other.url
+                and self.requirement == other.requirement
+                and self.responsibility == other.responsibility
+        )
 
     def __str__(self):
         """Метод для получения строковых значений объектов класса."""
