@@ -57,14 +57,14 @@ class Vacancy(VacansABS):
         if not isinstance(other, Vacancy):
             return False
         return (
-                self.id == other.id
-                and self.name == other.name
-                and self.city == other.city
-                and self.salary_from == other.salary_from
-                and self.salary_to == other.salary_to
-                and self.url == other.url
-                and self.requirement == other.requirement
-                and self.responsibility == other.responsibility
+            self.id == other.id
+            and self.name == other.name
+            and self.city == other.city
+            and self.salary_from == other.salary_from
+            and self.salary_to == other.salary_to
+            and self.url == other.url
+            and self.requirement == other.requirement
+            and self.responsibility == other.responsibility
         )
 
     def __str__(self):

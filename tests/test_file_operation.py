@@ -1,16 +1,21 @@
 import unittest
-from unittest.mock import patch, mock_open
+from unittest.mock import patch
+
 from src.file_operation import FileOperation
 
 
 class TestFileOperation(unittest.TestCase):
+    """Тестовый класс для проверки работы класса FileOperation."""
 
-    @patch('src.file_operation.FileOperation.load_file', return_value=[
-        {"id": 1, "name": "Developer"},
-        {"id": 2, "name": "Designer"},
-        {"id": 3, "name": "Manager"}
-    ])
-    @patch('src.file_operation.FileOperation.write_file')
+    @patch(
+        "src.file_operation.FileOperation.load_file",
+        return_value=[
+            {"id": 1, "name": "Developer"},
+            {"id": 2, "name": "Designer"},
+            {"id": 3, "name": "Manager"},
+        ],
+    )
+    @patch("src.file_operation.FileOperation.write_file")
     def test_delete_by_id(self, mock_write_file, mock_load_file):
 
         file_op = FileOperation(filename="test_file")
